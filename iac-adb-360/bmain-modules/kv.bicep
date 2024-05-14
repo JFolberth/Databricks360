@@ -26,7 +26,7 @@ resource kv 'Microsoft.KeyVault/vaults@2023-02-01' = {
 
 
 
-resource kvadminsroledef 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+/* resource kvadminsroledef 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
   scope: subscription()
   name: kvadmins
 }
@@ -58,3 +58,4 @@ resource kvuserra 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
+ */
