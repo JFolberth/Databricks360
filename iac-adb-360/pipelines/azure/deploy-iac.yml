@@ -43,7 +43,7 @@ stages:
         steps:
         - task: AzureCLI@2
           inputs:
-            azureSubscription: 'AzureDevExtServiceConnection'
+            azureSubscription: 'ado-sc'
             scriptType: 'bash'
             scriptLocation: 'inlineScript'
             inlineScript: 'az deployment group validate --resource-group $(resourcegroup) --template-file ./iac-adb-360/main.bicep --parameters baseName=$(baseName)  kvadminsgroupoid=$(kvadminsoid) kvsreadersgroupoid=$(kvsreadersgroupoid)'
