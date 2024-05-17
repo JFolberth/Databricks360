@@ -20,10 +20,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - bash: | 
-        sudo apt-get install jq
-        which jq
-      displayName: 'Fetch jq'
     - task: CmdLine@2
       inputs:
         script: |
