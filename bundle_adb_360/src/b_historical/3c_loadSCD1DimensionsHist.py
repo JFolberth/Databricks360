@@ -39,6 +39,8 @@ from pyspark.sql.functions import lit, monotonically_increasing_id, row_number
 from pyspark.sql.types import LongType
 from pyspark.sql.window import Window
 from delta.tables import DeltaTable
+from time import sleep
+
 
 # COMMAND ----------
 
@@ -145,9 +147,11 @@ while bContinue:
             ) \
             .execute()
         bContinue = False
-    except ConcurrentAppendException:
-        bContinue = True
-        print('caught ConcurrentAppendException!')
+    except Exception as e:
+        if "ConcurrentAppendException" in str(e):
+            bContinue = True
+            print('caught ConcurrentAppendException!')
+            sleep(20)
 
 # COMMAND ----------
 

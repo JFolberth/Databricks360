@@ -62,7 +62,6 @@ then
     
     # getting the credentialname
     cred=$(databricks storage-credentials list --output json | jq -r ".[] | select(.name==\"$credname\") | .name")
-    
     # if we don't have the credential, create it
     if [ -z "$cred" ]
     then
