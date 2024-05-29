@@ -1,0 +1,50 @@
+trigger:
+  branches:
+    include:
+      - devy
+
+  paths:
+    include:
+      - '*'
+
+variables:
+- group: vgdevadb360
+
+stages:
+- stage: stg_validate_deploy_bundles
+  displayName: 'validate_deploy_bundles'
+  jobs:
+  - job: j_validate_deploy_bundles
+    displayName: 'validate_deploy_bundles'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+      displayName: 'Install Databricks CLI v 2'
+
+    - task: AzureCLI@2
+      displayName: 'validate bundle'
+      inputs:
+        azureSubscription: 'adb-sc'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          cd bundle_adb_360
+          databricks bundle validate
+
+
+
+    - task: AzureCLI@2
+      displayName: 'call script to deploy bundle'
+      inputs:
+        azureSubscription: 'adb-sc'
+        scriptType: 'bash'
+        scriptLocation: 'scriptPath'
+        scriptPath: './bundle_adb_360/helpers/bundle-deploy.sh'
+        arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) $(env)'
+
+
+

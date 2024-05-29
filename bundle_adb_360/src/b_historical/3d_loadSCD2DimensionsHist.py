@@ -34,6 +34,7 @@ from pyspark.sql.functions import lit, monotonically_increasing_id, row_number
 from pyspark.sql.types import LongType
 from pyspark.sql.window import Window
 from delta.tables import DeltaTable
+from time import sleep
 
 # COMMAND ----------
 
@@ -77,26 +78,36 @@ customerupserts.write.mode('overwrite').format('delta').saveAsTable(f'golddb.{de
 
 #merge to watermark
 tDelta = DeltaTable.forName(spark, destdbname + '.' + watermarktable)
-tDelta.alias('t') \
-    .merge(
-        wmdf.alias('u'),
-        't.tablename = u.tablename'
-    ) \
-    .whenMatchedUpdate(set=
-    {
-        'tablename' : 'u.tablename',
-        'lastCommitKey' : 'u.lastCommitKey',
-        'lastTimeStamp' : 'u.lastTimeStamp'
-    }
-    ) \
-    .whenNotMatchedInsert(values=
-    {
-        'tablename' : 'u.tablename',
-        'lastCommitKey' : 'u.lastCommitKey',
-        'lastTimeStamp' : 'u.lastTimeStamp'
-    }
-    ) \
-    .execute()
+bContinue = True
+while bContinue:
+    try:
+        tDelta.alias('t') \
+            .merge(
+                wmdf.alias('u'),
+                't.tablename = u.tablename'
+            ) \
+            .whenMatchedUpdate(set=
+            {
+                'tablename' : 'u.tablename',
+                'lastCommitKey' : 'u.lastCommitKey',
+                'lastTimeStamp' : 'u.lastTimeStamp'
+            }
+            ) \
+            .whenNotMatchedInsert(values=
+            {
+                'tablename' : 'u.tablename',
+                'lastCommitKey' : 'u.lastCommitKey',
+                'lastTimeStamp' : 'u.lastTimeStamp'
+            }
+            ) \
+            .execute()
+        bContinue = False
+    except Exception as e:
+        if "ConcurrentAppendException" in str(e):
+            bContinue = True
+            print('caught ConcurrentAppendException!')
+            sleep(20)
+
 
 # COMMAND ----------
 
