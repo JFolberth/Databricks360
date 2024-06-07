@@ -19,7 +19,7 @@ resources:
           notebook_task:
             notebook_path: ../src/a_init/bronze-volume-setup.sql
             base_parameters:
-              storageaccountname: dlg2westus2adb360051gclk
+              storageaccountname: dlg2westus2adb360051cvlv
 
 
       job_clusters:
