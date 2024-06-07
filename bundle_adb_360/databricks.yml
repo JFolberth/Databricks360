@@ -22,7 +22,7 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://adb-4088297730294382.2.azuredatabricks.net
+      host: https://adb-141546056528589.9.azuredatabricks.net
 
 
   ## Optionally, there could be a 'staging' target here.
