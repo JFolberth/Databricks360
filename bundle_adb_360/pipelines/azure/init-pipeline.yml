@@ -65,7 +65,7 @@ stages:
                   scriptType: 'bash'
                   scriptLocation: 'scriptPath'
                   scriptPath: '../bundle/helpers/bundle-deploy.sh'
-                  arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) ${{ variables.env }}'
+                  arguments: '${{ variables.resourceGroupName }} ${{ variables.tenantId }} ${{ variables.clientId }} $(clientSecret) ${{ variables.env }}'
   
 
 
