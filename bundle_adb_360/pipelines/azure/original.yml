@@ -45,6 +45,6 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'scriptPath'
         scriptPath: './bundle_adb_360/helpers/bundle-deploy.sh'
-        arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) $(env)'
+        arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) dev'
 
 
