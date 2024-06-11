@@ -65,7 +65,7 @@ stages:
                   scriptType: 'bash'
                   scriptLocation: 'inlineScript'
                   inlineScript: |
-                    cd bundle
+                    cd ../bundle
                     databricks bundle validate
               - task: AzureCLI@2
                 displayName: 'call script to deploy bundle'
