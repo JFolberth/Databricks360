@@ -27,4 +27,5 @@ export ARM_TENANT_ID=$tenantid
 export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
 
 cd bundle
+ls
 databricks bundle deploy -t $env
