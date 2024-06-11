@@ -34,6 +34,11 @@ stages:
         inlineScript: |
           cd bundle_adb_360
           databricks bundle validate
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact Bundle '
+      inputs:
+        targetPath: $(Pipeline.Workspace)
+        artifact:   'bundle'
 
 - stage: deploy_bundle_dev
   displayName: 'Deploy Bundle to Dev'
