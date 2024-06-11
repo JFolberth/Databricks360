@@ -26,6 +26,6 @@ export ARM_TENANT_ID=$tenantid
 # this is going to add ths sp to the workspace
 export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
 
-cd bundle
-ls
+cd s/bundle
+
 databricks bundle deploy -t $env
