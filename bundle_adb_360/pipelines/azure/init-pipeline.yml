@@ -37,7 +37,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Pipeline Artifact Bundle '
       inputs:
-        targetPath: $(Pipeline.Workspace)
+        targetPath: $(Pipeline.Workspace)/bundle_adb_360
         artifact:   'bundle'
 
 - stage: deploy_bundle_dev
@@ -65,7 +65,7 @@ stages:
                   azureSubscription: 'adb-sc'
                   scriptType: 'bash'
                   scriptLocation: 'scriptPath'
-                  scriptPath: './bundle_adb_360/helpers/bundle-deploy.sh'
+                  scriptPath: 'bundle/helpers/bundle-deploy.sh'
                   arguments: '${{ variables.resourceGroupName }} ${{ variables.tenantId }} ${{ variables.clientId }} $(clientSecret) ${{ variables.env }}'
   
 
