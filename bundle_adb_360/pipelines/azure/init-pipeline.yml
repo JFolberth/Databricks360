@@ -58,7 +58,15 @@ stages:
                   script: |
                     curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
                 displayName: 'Install Databricks CLI v 2'
-              - powershell: Get-ChildItem -Path $(Pipeline.Workspace) -recurse
+              - task: AzureCLI@2
+                displayName: 'validate bundle'
+                inputs:
+                  azureSubscription: 'adb-sc'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: |
+                    cd bundle
+                    databricks bundle validate
               - task: AzureCLI@2
                 displayName: 'call script to deploy bundle'
                 inputs:
