@@ -35,8 +35,21 @@ stages:
           cd bundle_adb_360
           databricks bundle validate
 
-
-
+- stage: deploy_bundle_dev
+  displayName: 'Deploy Bundle to Dev'
+  variables:
+    - name: env
+      value: 'dev'
+    - group: vgdevadb360
+    - template: 'variables/dev.yml'
+  jobs:
+  - deployment: 
+    environments: ${{ variables.env }}
+    - task: CmdLine@2
+      inputs:
+        script: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+      displayName: 'Install Databricks CLI v 2'
     - task: AzureCLI@2
       displayName: 'call script to deploy bundle'
       inputs:
@@ -44,7 +57,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'scriptPath'
         scriptPath: './bundle_adb_360/helpers/bundle-deploy.sh'
-        arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) $(env)'
+        arguments: '${{ variables.resourceGroupName }} ${{ variables.tenantId }} ${{ variables.clientId }} $(clientSecret) ${{ variables.env }}'
 
 
 
