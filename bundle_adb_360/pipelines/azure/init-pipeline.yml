@@ -62,7 +62,7 @@ stages:
               - task: AzureCLI@2
                 displayName: 'call script to deploy bundle'
                 inputs:
-                  azureSubscription: 'adb-sc'
+                  azureSubscription: 'dev2'
                   scriptType: 'bash'
                   scriptLocation: 'scriptPath'
                   scriptPath: '../bundle/helpers/bundle-deploy.sh'
