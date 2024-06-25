@@ -29,6 +29,6 @@ export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
 
 
  cd ../bundle_adb_360
-chmod +x ./
-sudo databricks bundle deploy -t $env
+chmod +x ./databricks
+databricks bundle deploy -t $env
 databricks version
