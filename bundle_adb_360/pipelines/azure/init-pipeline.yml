@@ -19,11 +19,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish Pipeline Artifact Bundle '
-      inputs:
-        targetPath: $(Pipeline.Workspace)/s/bundle_adb_360
-        artifact:   'bundle_adb_360'
     - task: CmdLine@2
       inputs:
         script: |
@@ -38,7 +33,11 @@ stages:
         inlineScript: |
           cd bundle_adb_360
           databricks bundle validate
-
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact Bundle '
+      inputs:
+        targetPath: $(Pipeline.Workspace)/s/bundle_adb_360
+        artifact:   'bundle_adb_360'
 
 - stage: deploy_bundle_dev
   displayName: 'Deploy Bundle to Dev'
@@ -57,6 +56,7 @@ stages:
               - task: CmdLine@2
                 inputs:
                   script: |
+                    cd bundle_adb_360
                     curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
                 displayName: 'Install Databricks CLI v 2'
               - task: AzureCLI@2
