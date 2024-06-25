@@ -15,7 +15,8 @@ echo "$env as parm 5"
 # get workspace url and id
 workspacestuff=$(az databricks workspace list -g $resourcegroupname --query "[].{url:workspaceUrl, id:id}" -o tsv)
 workspaceUrl=$(echo $workspacestuff | cut -d " " -f 1)
-workspaceId=$(echo $workspacestuff | cut -d " " -f 2)
+workspaceId = "/subscriptions/898e66c4-4550-43c4-93a1-2d3c16932df2/resourceGroups/rg-wus2-adb3600513-dev/providers/Microsoft.Databricks/workspaces/adbws-wus2adb3600513dev"
+# workspaceId=$(echo $workspacestuff | cut -d " " -f 2)
 echo "$workspaceUrl"
 echo "$workspaceId"
 
@@ -25,8 +26,9 @@ export ARM_CLIENT_SECRET=$clientsecret
 export ARM_TENANT_ID=$tenantid
 # this is going to add ths sp to the workspace
 export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
+export BUNDLE_ROOT=../bundle_adb_360
 
 # cd ../bundle
 # cd bundle_adb_360
 
-databricks bundle deploy -t $env
+databricks bundle deploy -t $env --debug
