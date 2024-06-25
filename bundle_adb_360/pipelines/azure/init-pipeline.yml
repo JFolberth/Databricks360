@@ -54,7 +54,6 @@ stages:
       runOnce:
           deploy:
             steps:
-              - checkout: self
               - task: CmdLine@2
                 inputs:
                   script: |
