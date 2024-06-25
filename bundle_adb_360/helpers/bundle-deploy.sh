@@ -31,6 +31,4 @@ export BUNDLE_ROOT=../bundle_adb_360
 # cd ../bundle
 
 databricks bundle deploy -t $env
-pwd
-ls
-
+databricks version
