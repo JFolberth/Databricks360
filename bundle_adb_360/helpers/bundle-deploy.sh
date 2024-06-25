@@ -27,7 +27,6 @@ export ARM_TENANT_ID=$tenantid
 export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
 export BUNDLE_ROOT=../bundle_adb_360
 
-ls -d -- */
 # cd ../bundle
 # cd bundle_adb_360
 
