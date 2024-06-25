@@ -30,6 +30,5 @@ export BUNDLE_ROOT=./bundle_adb_360
 
 # cd ../bundle
 # cd bundle_adb_360
-ls
-databricks bundle deploy -t $env --debug
-ls
+databricks bundle deploy -t $env
+
