@@ -25,8 +25,10 @@ export ARM_CLIENT_SECRET=$clientsecret
 export ARM_TENANT_ID=$tenantid
 # this is going to add ths sp to the workspace
 export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
-export BUNDLE_ROOT=$(Pipeline.Workspace)/bundle_adb_360
+export BUNDLE_ROOT=../bundle_adb_360
+
+ls -d -- */
 # cd ../bundle
-cd ../bundle_adb_360
+# cd bundle_adb_360
 
 databricks bundle deploy -t $env
