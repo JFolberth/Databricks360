@@ -13,3 +13,5 @@
     value: 'rg'
   - name: artifactName
     value: 'bundle_adb_360'
+  - name: bundleArtifactLocation
+    value: $(Pipeline.Workspace)/s/bundle_adb_360
