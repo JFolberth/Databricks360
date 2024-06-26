@@ -1,6 +1,7 @@
 parameters:
 - name: artifactName
-  value: ''
+  type: string
+  default: ''
 jobs:
   - job: j_validate_deploy_bundles
     displayName: 'validate_deploy_bundles'
