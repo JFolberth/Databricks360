@@ -8,7 +8,7 @@ trigger:
       - '*'
 
 variables:
-- template: 'variables/global.yml'
+  - template: 'variables/global.yml'
 
 stages:
 - stage: stg_validate_deploy_bundles
