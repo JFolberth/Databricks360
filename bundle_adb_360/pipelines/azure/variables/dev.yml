@@ -19,5 +19,7 @@ variables:
     value: https://adb-141546056528589.9.azuredatabricks.net
   - name: serviceIdentifier
     value: '0513'
+  - name: env
+    value: 'dev'
   
   
