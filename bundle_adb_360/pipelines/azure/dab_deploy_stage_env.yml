@@ -10,6 +10,7 @@ stages:
       displayName: 'Deploy Bundle to ${{ environmentObject.environmentName }}'
       variables:
         - template: 'variables/${{ environmentObject.environmentName }}.yml'
+        - template: 'variables/global.yml'
         - group: vg${{ variables.env }}adb360
         - name: resourceGroupName
           value: '${{ variables.resourceGroupAbrv }}-${{variables.regionAbrv }}-${{ variables.serviceName }}-${{ variables.serviceIdentifier }}'
