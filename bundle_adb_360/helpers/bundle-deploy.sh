@@ -28,6 +28,5 @@ export ARM_TENANT_ID=$tenantid
 export DATABRICKS_AZURE_RESOURCE_ID=$workspaceId
 
 
- cd ../bundle_adb_360
 databricks bundle deploy -t $env
-databricks version
+
