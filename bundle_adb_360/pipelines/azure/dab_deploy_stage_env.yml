@@ -7,7 +7,7 @@ parameters:
 stages:
   - ${{ each environmentObject in parameters.environmentObjects }} :
     - stage: deploy_bundle_${{ environmentObject.environmentName }}
-      displayName: 'Deploy Bundle to ${{ environmentName }}'
+      displayName: 'Deploy Bundle to ${{ environmentObject.environmentName }}'
       variables:
         - template: 'variables/${{ environmentObject.environmentName }}.yml'
         - group: vg${{ variables.env }}adb360
@@ -16,7 +16,7 @@ stages:
        
       jobs:
       - deployment: 
-        environment: ${{ variables.env }}
+        environment: ${{ environmentObject.environmentName }}
         strategy:
           runOnce:
               deploy:
