@@ -1,0 +1,7 @@
+  variables:
+  - name: tenantid
+    value: '36070862-cf76-4c7b-a2b3-d1177f9469d1'
+  - name: ghuser
+    value: 'JFolberth'
+  - name: repourl
+    value: 'https://github.com/JFolberth/Databricks360.git'

@@ -11,15 +11,11 @@ variables:
     value: 'sharedcluster'
   - name: credname
     value: 'devcreds'
-  - name: ghuser
-    value: 'JFolberth'
   - name: 'metastorename'
     value: 'metastore_azure_westus2'
-  - name: repourl
-    value: 'https://github.com/JFolberth/Databricks360.git'
   - name: resourcegroupname
     value: 'rg-wus2-adb3600513-dev'
-  - name: tenantid
-    value: '36070862-cf76-4c7b-a2b3-d1177f9469d1'
+  - name: workspaceURL
+    value: https://adb-141546056528589.9.azuredatabricks.net
   
   

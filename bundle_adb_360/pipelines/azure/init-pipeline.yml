@@ -8,7 +8,7 @@ trigger:
       - '*'
 
 variables:
-- group: vgdevadb360
+- template: 'variables/global.yml'
 
 stages:
 - stage: stg_validate_deploy_bundles
