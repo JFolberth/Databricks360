@@ -60,7 +60,7 @@ stages:
                     curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
                 displayName: 'Install Databricks CLI v 2'
               - script: |
-                chmod +x ../bundle_adb_360/helpers/bundle-deploy.sh
+                  chmod +x ../bundle_adb_360/helpers/bundle-deploy.sh
               - task: AzureCLI@2
                 displayName: 'call script to deploy bundle'
                 inputs:
