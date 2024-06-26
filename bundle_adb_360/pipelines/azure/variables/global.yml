@@ -4,7 +4,7 @@
   - name: repourl
     value: 'https://github.com/JFolberth/Databricks360.git'
   - name: serviceName
-    value: 'adb3600513'
+    value: 'adb360'
   - name: regionAbrv
     value: 'wus2'
   - name: databricsAbrv
