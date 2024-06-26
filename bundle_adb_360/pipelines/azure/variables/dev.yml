@@ -17,5 +17,7 @@ variables:
     value: 'rg-wus2-adb3600513-dev'
   - name: workspaceURL
     value: https://adb-141546056528589.9.azuredatabricks.net
+  - name: serviceIdentifier
+    value: '0513'
   
   
