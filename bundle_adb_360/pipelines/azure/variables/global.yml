@@ -9,3 +9,5 @@
     value: 'wus2'
   - name: databricsAbrv
     value: 'adbws'
+  - name: env
+    value: 'dev'
