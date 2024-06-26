@@ -38,7 +38,6 @@ stages:
       inputs:
         targetPath: $(Pipeline.Workspace)/s/bundle_adb_360
         artifact:   'bundle_adb_360'
-        StoreAsTar: true
 
 - stage: deploy_bundle_dev
   displayName: 'Deploy Bundle to Dev'
@@ -54,9 +53,6 @@ stages:
       runOnce:
           deploy:
             steps:
-              - task: DownloadBuildArtifacts@1
-                inputs:
-                  extractTars: true
               - task: CmdLine@2
                 inputs:
                   script: |
