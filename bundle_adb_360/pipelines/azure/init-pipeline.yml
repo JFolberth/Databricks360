@@ -45,7 +45,8 @@ stages:
   variables:
     - template: 'variables/dev.yml'
     - group: vg${{ variables.env }}adb360
-    - databricksResourceId: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
+    - name: databricksResourceId
+      value: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
    
   jobs:
   - deployment: 
