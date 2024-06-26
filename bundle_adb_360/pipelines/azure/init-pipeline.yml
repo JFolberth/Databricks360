@@ -44,7 +44,7 @@ stages:
           cd ${{ variables.artifactName }}
           databricks bundle validate
 
-- template: stages/adf_deploy_stage.yml@templates
+- template: dab_deploy_stage_env.yml
   parameters:
     environmentObjects: ${{ parameters.environmentObjects }}
 
