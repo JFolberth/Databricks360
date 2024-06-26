@@ -9,7 +9,6 @@ trigger:
 
 variables:
   - template: 'variables/global.yml'
-  - artifactName: 'bundle_adb_360'
 
 stages:
 - stage: stg_validate_deploy_bundles
