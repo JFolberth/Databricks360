@@ -1,3 +1,7 @@
+parameters:
+- name: artifactName
+  value: ''
+jobs:
   - job: j_validate_deploy_bundles
     displayName: 'validate_deploy_bundles'
     steps:
@@ -13,5 +17,5 @@
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd ${{ variables.artifactName }}
+          cd ${{ parameters.artifactName }}
           databricks bundle validate
