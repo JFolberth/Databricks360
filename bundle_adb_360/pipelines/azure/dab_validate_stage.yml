@@ -6,7 +6,7 @@ stages:
   jobs:
   - template: publish_pipeline_artifact_job.yml
     parameters:
-      artifactName: ${{ variables.artfactName }}
+      artifactName: ${{ variables.artifactName }}
       pathToArtifact: ${{ variables.bundleArtifactLocation }}
   - job: j_validate_deploy_bundles
     displayName: 'validate_deploy_bundles'
