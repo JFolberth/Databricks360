@@ -68,7 +68,6 @@ stages:
                   scriptLocation: 'scriptPath'
                   scriptPath: '../bundle_adb_360/helpers/bundle-deploy.sh'
                   arguments: '${{ variables.resourceGroupName }} ${{ variables.tenantId }} ${{ variables.clientId }} $(clientSecret) ${{ variables.env }}'
-              - powershell: tree ../ -a
   
 
 
