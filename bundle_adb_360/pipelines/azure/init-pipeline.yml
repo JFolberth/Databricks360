@@ -17,6 +17,8 @@ parameters:
 stages:
 - stage: stg_validate_deploy_bundles
   displayName: 'validate_deploy_bundles'
+  variables:
+    - template: 'variables/global.yml'
   jobs:
   - job: j_validate_deploy_bundles
     displayName: 'validate_deploy_bundles'
