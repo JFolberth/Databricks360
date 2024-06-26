@@ -15,7 +15,7 @@ parameters:
     - environmentName: 'dev'
 
 stages:
-- template: dab_vaildate_stage.yml
+- template: dab_validate_stage.yml
 - template: dab_deploy_stage_env.yml
   parameters:
     environmentObjects: ${{ parameters.environmentObjects }}
