@@ -9,6 +9,11 @@ trigger:
 
 variables:
   - template: 'variables/global.yml'
+parameters:
+- name: evironmentObjects
+  type: object
+  default:
+    - environmentName: 'dev'
 
 stages:
 - stage: stg_validate_deploy_bundles
@@ -39,42 +44,9 @@ stages:
           cd ${{ variables.artifactName }}
           databricks bundle validate
 
+- template: stages/adf_deploy_stage.yml@templates
+  parameters:
+    environmentObjects: ${{ parameters.environmentObjects }}
 
-- stage: deploy_bundle_dev
-  displayName: 'Deploy Bundle to Dev'
-  variables:
-    - template: 'variables/dev.yml'
-    - group: vg${{ variables.env }}adb360
-    - name: databricksResourceId
-      value: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
-   
-  jobs:
-  - deployment: 
-    environment: ${{ variables.env }}
-    strategy:
-      runOnce:
-          deploy:
-            steps:
-              - task: CmdLine@2
-                inputs:
-                  script: |
-                    cd ${{ variables.artifactName }}
-                    curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-                displayName: 'Install Databricks CLI v 2'
-              - task: AzureCLI@2
-                displayName: 'call script to deploy bundle'
-                inputs:
-                  azureSubscription: 'adb-sc'
-                  scriptType: 'bash'
-                  scriptLocation: 'inlineScript'
-                  inlineScript: |
-                    export ARM_CLIENT_ID=${{ variables.clientId }}
-                    export ARM_CLIENT_SECRET=$(clientSecret)
-                    export ARM_TENANT_ID=$(az account show --query tenantId --output tsv) 
-                    export DATABRICKS_AZURE_RESOURCE_ID= '/subscriptions/$azureSubscriptionId/${{ variables.databricksResourceId }}'
-                    cd ../${{ variables.artifactName }}
-                    databricks bundle deploy -t ${{ variables.env }}
-
-  
 
 
