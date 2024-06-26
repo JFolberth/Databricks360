@@ -43,8 +43,6 @@ stages:
 - stage: deploy_bundle_dev
   displayName: 'Deploy Bundle to Dev'
   variables:
-    - name: env
-      value: 'dev'
     - group: vgdevadb360
     - template: 'variables/dev.yml'
   jobs:
@@ -65,9 +63,16 @@ stages:
                 inputs:
                   azureSubscription: 'AzureDevExtServiceConnection'
                   scriptType: 'bash'
-                  scriptLocation: 'scriptPath'
-                  scriptPath: '../bundle_adb_360/helpers/bundle-deploy.sh'
-                  arguments: '${{ variables.resourceGroupName }} ${{ variables.tenantId }} ${{ variables.clientId }} $(clientSecret) ${{ variables.env }}'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: |
+                    azureSubscriptionId=$(az account show --query id --output tsv)
+                    export ARM_CLIENT_ID=${{ variables.clientId }}
+                    export ARM_CLIENT_SECRET=$(clientSecret)
+                    export ARM_TENANT_ID= $(az account show --query tenantId --output tsv) 
+                    export DATABRICKS_AZURE_RESOURCE_ID= '/subscriptions/$azureSubscriptionId/${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.resourceGroupName }}'
+                     cd ../bundle_adb_360
+                    databricks bundle deploy -t ${{ variables.env }}
+
   
 
 
