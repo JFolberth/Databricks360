@@ -6,10 +6,10 @@ parameters:
 
 stages:
   - ${{ each environmentObject in parameters.environmentObjects }} :
-    - stage: deploy_bundle_${{ environmentName }}
+    - stage: deploy_bundle_${{ environmentObject.environmentName }}
       displayName: 'Deploy Bundle to ${{ environmentName }}'
       variables:
-        - template: 'variables/${{ environmentName }}.yml'
+        - template: 'variables/${{ environmentObject.environmentName }}.yml'
         - group: vg${{ variables.env }}adb360
         - name: databricksResourceId
           value: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
@@ -28,7 +28,7 @@ stages:
                         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
                     displayName: 'Install Databricks CLI v 2'
                   - task: AzureCLI@2
-                    displayName: 'Deploy Bundle to ${{ environmentName }}'
+                    displayName: 'Deploy Bundle to ${{ environmentObject.environmentName }}'
                     inputs:
                       azureSubscription: 'adb-sc'
                       scriptType: 'bash'
