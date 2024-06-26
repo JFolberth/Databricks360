@@ -9,6 +9,7 @@ trigger:
 
 variables:
   - template: 'variables/global.yml'
+  - artifactName: 'bundle_adb_360'
 
 stages:
 - stage: stg_validate_deploy_bundles
@@ -23,7 +24,7 @@ stages:
       displayName: 'Publish Pipeline Artifact Bundle '
       inputs:
         targetPath: $(Pipeline.Workspace)/s/bundle_adb_360
-        artifact:   'bundle_adb_360'
+        artifact:   ${{ variables.artifactName }}
     - task: CmdLine@2
       inputs:
         script: |
@@ -36,15 +37,17 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd bundle_adb_360
+          cd ${{ variables.artifactName }}
           databricks bundle validate
 
 
 - stage: deploy_bundle_dev
   displayName: 'Deploy Bundle to Dev'
   variables:
-    - group: vgdevadb360
     - template: 'variables/dev.yml'
+    - group: vg${{ variables.env }}adb360
+    - databricksResourceId: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
+   
   jobs:
   - deployment: 
     environment: ${{ variables.env }}
@@ -55,7 +58,7 @@ stages:
               - task: CmdLine@2
                 inputs:
                   script: |
-                    cd bundle_adb_360
+                    cd ${{ variables.artifactName }}
                     curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
                 displayName: 'Install Databricks CLI v 2'
               - task: AzureCLI@2
@@ -69,8 +72,8 @@ stages:
                     export ARM_CLIENT_ID=${{ variables.clientId }}
                     export ARM_CLIENT_SECRET=$(clientSecret)
                     export ARM_TENANT_ID= $(az account show --query tenantId --output tsv) 
-                    export DATABRICKS_AZURE_RESOURCE_ID= '/subscriptions/$azureSubscriptionId/${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.resourceGroupName }}'
-                     cd ../bundle_adb_360
+                    export DATABRICKS_AZURE_RESOURCE_ID= ' /subscriptions/$azureSubscriptionId/${{ variables.databricksResourceId }}'
+                    cd ../${{ variables.artifactName }}
                     databricks bundle deploy -t ${{ variables.env }}
 
   
