@@ -9,5 +9,5 @@
     value: 'wus2'
   - name: databricsAbrv
     value: 'adbws'
-  - name: env
-    value: 'dev'
+  - name: artifactName
+    value: 'bundle_adb_360'
