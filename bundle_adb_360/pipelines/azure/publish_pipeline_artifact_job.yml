@@ -1,0 +1,16 @@
+parameters:
+- name: artifactName
+  type: string
+  default: 'drop'
+- name: pathToArtifact
+  type: string
+  default: $(Pipeline.Workspace)
+jobs:
+  - job: publish_${{ parameterse.artifactName }}
+    displayName: 'Publish ${{ parameterse.artifactName }}'
+    steps:
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact Bundle '
+      inputs:
+        targetPath: $(Pipeline.Workspace)/s/bundle_adb_360
+        artifact:   ${{ parameters.artifactName }}
