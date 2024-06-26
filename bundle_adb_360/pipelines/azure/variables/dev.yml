@@ -13,8 +13,6 @@ variables:
     value: 'devcreds'
   - name: 'metastorename'
     value: 'metastore_azure_westus2'
-  - name: resourcegroupname
-    value: 'rg-wus2-adb3600513-dev'
   - name: workspaceURL
     value: https://adb-141546056528589.9.azuredatabricks.net
   - name: serviceIdentifier
