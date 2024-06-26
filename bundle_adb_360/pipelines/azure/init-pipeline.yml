@@ -54,6 +54,9 @@ stages:
       runOnce:
           deploy:
             steps:
+              - task: DownloadBuildArtifacts@1
+                inputs:
+                  extractTars: true
               - task: CmdLine@2
                 inputs:
                   script: |
