@@ -1,5 +1,5 @@
 parameters:
-- name: environmentNames
+- name: environmentObjects
   type: object
   default:
     environmentName: 'dev'
