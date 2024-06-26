@@ -71,8 +71,8 @@ stages:
                     azureSubscriptionId=$(az account show --query id --output tsv)
                     export ARM_CLIENT_ID=${{ variables.clientId }}
                     export ARM_CLIENT_SECRET=$(clientSecret)
-                    export ARM_TENANT_ID= $(az account show --query tenantId --output tsv) 
-                    export DATABRICKS_AZURE_RESOURCE_ID= ' /subscriptions/$azureSubscriptionId/${{ variables.databricksResourceId }}'
+                    export ARM_TENANT_ID=$(az account show --query tenantId --output tsv) 
+                    export DATABRICKS_AZURE_RESOURCE_ID= '/subscriptions/$azureSubscriptionId/${{ variables.databricksResourceId }}'
                     cd ../${{ variables.artifactName }}
                     databricks bundle deploy -t ${{ variables.env }}
 
