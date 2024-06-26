@@ -64,7 +64,7 @@ stages:
               - task: AzureCLI@2
                 displayName: 'call script to deploy bundle'
                 inputs:
-                  azureSubscription: 'AzureDevExtServiceConnection'
+                  azureSubscription: 'adb-sc'
                   scriptType: 'bash'
                   scriptLocation: 'inlineScript'
                   inlineScript: |
