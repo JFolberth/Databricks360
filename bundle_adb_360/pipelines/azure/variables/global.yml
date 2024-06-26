@@ -9,5 +9,7 @@
     value: 'wus2'
   - name: databricsAbrv
     value: 'adbws'
+  - name: resourceGroupAbrv
+    value: 'rg'
   - name: artifactName
     value: 'bundle_adb_360'
