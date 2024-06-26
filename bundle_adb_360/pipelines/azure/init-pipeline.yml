@@ -54,6 +54,12 @@ stages:
       runOnce:
           deploy:
             steps:
+              - task: CmdLine@2
+                inputs:
+                  script: |
+                    cd bundle_adb_360
+                    curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+                displayName: 'Install Databricks CLI v 2'
               - task: AzureCLI@2
                 displayName: 'call script to deploy bundle'
                 inputs:
