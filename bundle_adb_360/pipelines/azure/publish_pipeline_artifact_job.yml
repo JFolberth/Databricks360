@@ -6,8 +6,8 @@ parameters:
   type: string
   default: $(Pipeline.Workspace)
 jobs:
-  - job: publish_${{ parameterse.artifactName }}
-    displayName: 'Publish ${{ parameterse.artifactName }}'
+  - job: publish_${{ parameters.artifactName }}
+    displayName: 'Publish ${{ parameters.artifactName }}'
     steps:
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Pipeline Artifact Bundle '
