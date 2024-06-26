@@ -12,7 +12,7 @@ stages:
         - template: 'variables/${{ environmentObject.environmentName }}.yml'
         - group: vg${{ variables.env }}adb360
         - name: resourceGroupName
-          value: '${{ variables.resourceAbrv }}-${{ variables.resourceAbrv }}-${{variables.regionAbrv }}-${{ variables.serviceName }}-${{ variables.serviceIdentifier }}'
+          value: '${{ variables.resourceGroupAbrv }}-${{variables.regionAbrv }}-${{ variables.serviceName }}-${{ variables.serviceIdentifier }}'
         - name: databricksResourceId
           value: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricksAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}'
        
