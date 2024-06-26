@@ -3,14 +3,10 @@ variables:
     value: '/subscriptions/898e66c4-4550-43c4-93a1-2d3c16932df2/resourceGroups/rg-wus2-adb3600513-dev/providers/Microsoft.Databricks/accessConnectors/adbac-wus2-adb3600513-dev'
   - name: bronzestorageaccountname
     value: 'dlg2westus2adb360051cvlv'
-  - name: catalogstorageaccountname
-    value: 'dlg2metastoredevwestvagx'
   - name: clientid
     value: 'b6c0f950-6ecf-446d-82bd-aaf7707916ff'
   - name: clusterconf
     value: 'sharedcluster'
-  - name: credname
-    value: 'devcreds'
   - name: 'metastorename'
     value: 'metastore_azure_westus2'
   - name: workspaceURL
@@ -19,5 +15,8 @@ variables:
     value: '0513'
   - name: env
     value: 'dev'
-  
+  - name: credname
+    value: '${{ variables.env }}creds'
+  - name: catalogstorageaccountname
+    value: 'dlg2metastore${{ variables.env }}westvagx'
   
