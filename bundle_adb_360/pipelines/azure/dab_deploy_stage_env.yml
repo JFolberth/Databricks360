@@ -12,7 +12,7 @@ stages:
         - template: 'variables/${{ environmentObject.environmentName }}.yml'
         - group: vg${{ variables.env }}adb360
         - name: databricksResourceId
-          value: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricsAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
+          value: '${{ variables.resourceGroupName }}/providers/Microsoft.Databricks/workspaces/${{ variables.databricksAbrv }}-${{variables.regionAbrv }}${{ variables.serviceName }}${{ variables.serviceIdentifier }}${{ variables.resourceGroupName }}'
        
       jobs:
       - deployment: 
@@ -34,6 +34,7 @@ stages:
                       scriptType: 'bash'
                       scriptLocation: 'inlineScript'
                       inlineScript: |
+                        subscriptionId=$(az account show --query id --output tsv)
                         export ARM_CLIENT_ID=${{ variables.clientId }}
                         export ARM_CLIENT_SECRET=$(clientSecret)
                         export ARM_TENANT_ID=$(az account show --query tenantId --output tsv) 
