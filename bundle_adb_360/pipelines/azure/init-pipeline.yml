@@ -22,7 +22,7 @@ parameters:
     - environmentName: 'dev'
 
 stages:
-- template: dab_validate_publish_stage.yml@templates
+- template: stages/dab_validate_publish_stage.yml@templates
 - template: dab_deploy_env_stage.yml
   parameters:
     environmentObjects: ${{ parameters.environmentObjects }}
