@@ -1,1 +1,39 @@
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    name: JFolberth/TheYAMLPipelineOne
+    endpoint: JFolberth
+    ref: feature/databricks
+trigger:
+  branches:
+    include:
+      - devy
+
+  paths:
+    include:
+      - '*'
+
+
+parameters:
+- name: environmentObjects
+  type: object
+  default:
+    - environmentName: 'dev'
+      regionAbrv: 'wus2'
+- name: artifactName
+  type: string
+  default: 'bundle_adb_360'
+- name: serviceName
+  type: string
+  default: 'adb360'
+
+stages:
+- template: stages/dab_validate_publish_stage.yml@templates
+  parameters:
+    artifactName: ${{ parameters.artifactName }}
+- template: dab_deploy_env_stage.yml
+  parameters:
+    environmentObjects: ${{ parameters.environmentObjects }}
+
 
