@@ -28,7 +28,7 @@ stages:
   parameters:
     artifactName: ${{ variables.artifactName }}
     serviceName: ${{ variables.serviceName }}
-- template: dab_deploy_env_stage.yml
+- template: stages/dab_deploy_stage.yml@templates
   parameters:
     environmentObjects: ${{ parameters.environmentObjects }}
 
