@@ -20,15 +20,14 @@ parameters:
   type: object
   default:
     - environmentName: 'dev'
-- name: artifactName
-  type: string
-  default: 'bundle_adb_360'
-- name: serviceName
-  type: string
-  default: 'adb360'
+variables:
+- template: variables/global.yml
 
 stages:
 - template: stages/dab_validate_publish_stage.yml@templates
+  parameters:
+    artifactName: ${{ variables.artifactName }}
+    serviceName: ${{ variables.serviceName }}
 - template: dab_deploy_env_stage.yml
   parameters:
     environmentObjects: ${{ parameters.environmentObjects }}
