@@ -20,6 +20,7 @@ parameters:
   type: object
   default:
     - environmentName: 'dev'
+    - regionAbrv: 'wus2'
 - name: artifactName
   type: string
   default: 'bundle_adb_360'
